@@ -21,7 +21,7 @@ export class AuthService {
     authcredentialsDto: AuthCredentialsDto,
   ): Promise<{ accessToken: string }> {
     const { username, password } = authcredentialsDto;
-    const user = await this.userRepository.findOneBy({ username });
+    const user = await this.userRepository.findOne({ username });
 
     if (user && (await bcrypt.compare(password, user.password))) {
       const payload = { username };
